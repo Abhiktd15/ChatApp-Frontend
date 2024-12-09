@@ -1,9 +1,11 @@
 import React from 'react'
+import {AppLayout} from '../components/layout/AppLayout';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>Chat</div>
   )
 }
+const WrappedChat = AppLayout()(Home)
 
-export default Home
+export default WrappedChat;
