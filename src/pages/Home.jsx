@@ -6,6 +6,6 @@ const Home = () => {
     <div>Chat</div>
   )
 }
-const WrappedChat = AppLayout()(Home)
+const WrappedChat = AppLayout(Home)
 
 export default WrappedChat;

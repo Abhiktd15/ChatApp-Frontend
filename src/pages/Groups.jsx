@@ -6,6 +6,6 @@ const Groups = () => {
     <div>Groups</div>
   )
 }
-const WrappedGroups= AppLayout()(Groups)
+const WrappedGroups= AppLayout(Groups)
 
 export default WrappedGroups;
