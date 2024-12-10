@@ -3,8 +3,9 @@ import Header from "./Header";
 import Title from "../shared/Title";
 import { Grid } from "@mui/material";
 import ChatList from "../specific/ChatList";
-import { SampleChats } from "../../constants/sampleData";
+import { samepleChats } from "../../constants/sampleData";
 import { useParams } from "react-router-dom";
+import Profile from "../specific/Profile";
 
 const AppLayout =  (WrappedComponent) => {
     const handleDeleteChat = (e,_id,groupChat) => {
@@ -29,7 +30,7 @@ const AppLayout =  (WrappedComponent) => {
                         height={"100%"} 
                     >
                         <ChatList 
-                            chats={SampleChats} 
+                            chats={samepleChats} 
                             chatId={chatId}
                             handleDeleteChat={handleDeleteChat}
                         />
@@ -56,7 +57,7 @@ const AppLayout =  (WrappedComponent) => {
                         lg={3}   
                         height={"100%"} 
                     >
-                        Third
+                        <Profile/>
                     </Grid>
                 </Grid>
 
