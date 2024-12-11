@@ -43,7 +43,7 @@ const Login = () => {
             >
                 {isLogin?(
                     <>
-                        <Typography variant='hs'>Login</Typography>
+                        <Typography variant='h5' fontWeight={"600"}>Login</Typography>
                         <form style={{
                             width:'100%',
                             marginTop:"1rem"
@@ -84,6 +84,7 @@ const Login = () => {
                                 variant='contained'
                                 color='primary'
                                 type='submit'
+                                fullWidth
                             >Login</Button>
                             <Typography textAlign={'center'} m={'1rem'}>Or</Typography>
                             <Button 
@@ -195,6 +196,7 @@ const Login = () => {
                                 variant='contained'
                                 color='primary'
                                 type='submit'
+                                fullWidth
                             >Sign Up</Button>
                             <Typography textAlign={'center'} m={'1rem'}>Or</Typography>
                             <Button 
