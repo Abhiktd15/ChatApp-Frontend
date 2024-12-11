@@ -77,12 +77,12 @@ export const sampleMessages = [
       },
       {
             attachments :[
-                  {
-                        public_id:"d;lafadkjf",
-                        url:"https://www.w3schools.com/howto/img_avatar.png"
-                  }
+                  // {
+                  //       public_id:"d;lafadkjf",
+                  //       url:"https://www.w3schools.com/howto/img_avatar.png"
+                  // }
             ],
-            content:"",
+            content:"Hello my name is abhishek bhardwaj Hello my name is abhishek bhardwaj ",
             _id:"sdfsdfsdf",
             sender:{
                   _id:"sdfsdfsdf",

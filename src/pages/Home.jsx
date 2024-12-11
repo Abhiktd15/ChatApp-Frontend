@@ -14,10 +14,12 @@ const Home = () => {
       justifyContent="center"
     >
       <Box
-        width="50%"
+        width="100%"
+        height="100%"
+        alignContent={"center"}
         bgcolor="white"
         boxShadow="0 4px 12px rgba(0,0,0,0.2)"
-        borderRadius="8px"
+        borderRadius="15px"
         textAlign="center"
         p="2rem"
       >

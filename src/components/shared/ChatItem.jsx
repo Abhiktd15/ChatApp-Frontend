@@ -15,25 +15,34 @@ const ChatItem = ({
         handleDeleteChat,
     }) => {
     return (
-        <Link to={`/chat/${_id}`} sx={{padding:"0"}} onContextMenu={(e) => handleDeleteChat(e,_id,groupChat)}>
+        <Link to={`/chat/${_id}`} sx={{padding:"1px 10px 1px 10px"}} onContextMenu={(e) => handleDeleteChat(e,_id,groupChat)}>
             <div
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.1)";
+                    e.currentTarget.style.color = "black"; // Optional: change text color
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = sameSender ? "rgba(0,0,0,0.5)" : "unset";
+                    e.currentTarget.style.color = sameSender ? "white" : "unset";
+                }}
                 style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                padding: "1rem",
-                backgroundColor: sameSender ? "black" : "unset",
-                color: sameSender ? "white" : "unset",
-                position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    borderRadius:'45px',
+                    gap: "1rem",
+                    padding: "0.5rem 0.7rem",
+                    backgroundColor: sameSender ? " rgba(0,0,0,0.5)" : "unset",
+                    color: sameSender ? "white" : "unset",
+                    position: "relative",
                 }}
             >
                 {/* Avatar Card */}
                 <AvatarCard avatar={avatar}/>
                 <Stack>
-                <Typography>{name}</Typography>
-                {newMessageAlert && (
-                    <Typography>{newMessageAlert.count} New Message</Typography>
-                )}
+                    <Typography>{name}</Typography>
+                    {newMessageAlert && (
+                        <Typography>{newMessageAlert.count} New Message</Typography>
+                    )}
                 </Stack>
 
                 {/* Online Indicator */}

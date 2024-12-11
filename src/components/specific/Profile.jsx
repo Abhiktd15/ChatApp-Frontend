@@ -5,7 +5,7 @@ import moment from "moment"
 
 const Profile = () => {
   return (
-    <Stack spacing={"2rem"} direction={"column"} alignItems={"center"}>
+    <Stack spacing={"2rem"} direction={"column"} alignItems={"center"} padding={'1rem'}>
       <Avatar
         sx={{
           width: 200,

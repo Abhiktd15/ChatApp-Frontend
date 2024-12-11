@@ -18,9 +18,7 @@ export const Link = styled(LinkComponent)`
     text-decoration:none;
     color:black;
     padding:1rem;
-    &:hover{
-        background-color: rgba(0,0,0,0.1);
-    }
+    
 
 `
 
@@ -29,7 +27,9 @@ export const InputBox = styled("input")`
     height:100%;
     border:none;
     outline:none;
-    padding:0 3rem;
+    padding:0 4rem;
     border-radius:1.5rem;
-    background-color:${grayColor};
+    color:gray;
+    font-size:18px;
+    background-color: offwhite;
 `

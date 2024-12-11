@@ -12,28 +12,32 @@ const MessageComponent = ({message,user}) => {
     return (
         <div style={{
             alignSelf: sameSender? 'flex-end':'flex-start',
-            maxWidth:"50%"
+            maxWidth:"70%",
+            width:"fit-content",
+            
         }}>
             {
                     !sameSender && 
-                    <Typography color={lightBlue} fontWeight={'600'} variant='body2' px={"1rem"}>
+                    <Typography textAlign={"start"} color={lightBlue} fontWeight={'600'} variant='body2' px={"1rem"}>
                         {sender.name}
                     </Typography>
                 }
             <div
                 style={{
-                    backgroundColor:sameSender?'#25D366':"#808080",
-                    color:"white",
+                    backgroundColor:sameSender?'#3B73FC':"white",
+                    color:sameSender?"white":"black",
                     fontWeight:"bold",
                     fontSize:"1rem",
                     borderRadius:"15px",
-                    padding:"0.5rem 0.5rem 1rem 0.5rem ",
-                    width:"fit-content",
-                    position:'relative'
+                    padding:"1rem 0.7rem 1.5rem 0.7rem ",
+                    width:"auto",
+                    position:'relative',
+                    border:"1px solid ",
+                    borderColor:"lightgray"
                 }}
             >
                 
-                {content && <Typography>
+                {content && <Typography fontFamily={"monospace"} lineHeight={'20px'} textAlign={"left"}>
                         {content}
                     </Typography>
                 }

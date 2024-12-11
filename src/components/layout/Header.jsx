@@ -47,9 +47,11 @@ const Header = () => {
         }}>
           <Toolbar>
             <Typography
-              variant='h6'
+              variant='h4'
               sx={{
-                display:{xs:'none',sm:'block'}
+                display:{xs:'none',sm:'block'},
+                fontWeight:"bold"
+                
               }}
             >
               Talkative
