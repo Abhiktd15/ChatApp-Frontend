@@ -3,41 +3,47 @@ import {Menu as MenuItem,Search as SearchIcon,Add as AddIcon, Group as GroupIcon
 import React, { lazy, Suspense, useState } from 'react'
 import { orange } from '../../constants/color'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { server } from '../../constants/config'
+import toast from 'react-hot-toast'
+import { useDispatch, useSelector } from 'react-redux'
+import { userNotExists } from '../../store/reducers/auth'
+import { setIsMobile, setIsSearch } from '../../store/reducers/misc'
 const Search = lazy(() => import('../specific/Search'))
 const NewGroup = lazy(() => import('../specific/NewGroup'));
 const Notifications = lazy(() => import('../specific/Notifications'))
 
 const Header = () => {
   const navigate = useNavigate(null)
+  const dispatch = useDispatch()
 
-  const [isMobile,setIsMobile] = useState(false);
-  const [isSearch,setIsSearch] = useState(false);
+  const {isSearch} = useSelector((state) => state.misc)
+
   const [isNewGroup,setIsNewGroup] = useState(false);
   const [isNotification,setIsNotification] = useState(false);
 
   
-  const handleMobile = () => {
-    // Handle mobile menu toggle
-    setIsMobile(prev => !prev)
-    
-  }
-  const openSearchDialog = () => {
-    // Open search dialog
-    setIsSearch(prev => !prev)
-  }
-  const openNewGroup = () => {
-    // Open new group dialog
-    setIsNewGroup(prev => !prev)
-  }
+  const handleMobile = () => dispatch(setIsMobile(true))
+  const openSearchDialog = () => dispatch(setIsSearch(true))
+  const openNewGroup = () => setIsNewGroup(prev => !prev)
+  
   const openNotification = () => {
     // Open new group dialog
     setIsNotification(prev => !prev)
   }
   const navigateToGroup = () => navigate('/groups')
 
-  const logoutHandler = () => {
+  const logoutHandler = async () => {
     // Handle logout logic
-    console.log('User logged out')
+    // console.log('User logged out')
+    try {
+      const {data}  = await axios.get(`${server}/api/v1/user/logout`,{withCredentials:true})
+      toast.success(data.message)
+      dispatch(userNotExists())
+
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Something went wrong")
+    }
   }
   return (
     <>

@@ -1,25 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Title from "../shared/Title";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Drawer, Grid, Skeleton, Typography } from "@mui/material";
 import ChatList from "../specific/ChatList";
 import { samepleChats } from "../../constants/sampleData";
 import { useParams } from "react-router-dom";
 import Profile from "../specific/Profile";
 import { grayColor } from "../../constants/color";
+import { useMyChatsQuery } from "../../store/api/api";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsMobile } from "../../store/reducers/misc";
+import { useErrors } from "../../hooks/hook";
 
 const AppLayout =  (WrappedComponent) => {
-    const handleDeleteChat = (e,_id,groupChat) => {
-        e.preventDefault();
-        console.log("Delete Chat: ",_id,groupChat)
-    }
     const Layout = (props) => {
         const params = useParams()
         const chatId = params.chatId
+        const dispatch = useDispatch()
+        const {isMobile} = useSelector((state) => state.misc)
+        const {isLoading,data,isError,error,refetch} = useMyChatsQuery("")
+
+        useErrors([{isError,error}])
+        
+        const handleDeleteChat = (e,_id,groupChat) => {
+            e.preventDefault();
+            console.log("Delete Chat: ",_id,groupChat)
+        }
+
+        const handleMobileClose = () => dispatch(setIsMobile(false))
+
         return (
             <>
                 <Title />
                 <Header />
+
+                {
+                    isLoading ? (<Skeleton/>):(
+                        <Drawer open={isMobile} onClose={handleMobileClose}>
+                            <ChatList
+                                w="70vw"
+                                chats={data?.chats}
+                                chatId={chatId}
+                                handleDeleteChat={handleDeleteChat}
+                            />
+                        </Drawer>
+                    )
+                }
+
                 <Grid container height={"calc(100vh - 4rem)"} bgcolor={grayColor}>
                     <Grid 
                         item 
@@ -40,11 +67,15 @@ const AppLayout =  (WrappedComponent) => {
                             height={"100%"}
                         >
                             <Typography textAlign={"center"} p={"1rem"} variant="h6" fontWeight={"600"} color={"Black"}>Chats</Typography>
-                            <ChatList 
-                                chats={samepleChats} 
-                                chatId={chatId}
-                                handleDeleteChat={handleDeleteChat}
-                            />
+                            {
+                                isLoading ? (<Skeleton/>):(
+                                    <ChatList 
+                                        chats={data?.chats} 
+                                        chatId={chatId}
+                                        handleDeleteChat={handleDeleteChat}
+                                    />
+                                )
+                            }
                         </Box>
                     </Grid>
 

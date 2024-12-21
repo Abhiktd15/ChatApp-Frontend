@@ -20,7 +20,7 @@ const Dashboard = () => {
     <Paper
       elevation={3}
       sx={{
-        padding: "2rem",
+        padding: "2rem ",
         marging: "2rem 0",
         borderRadius: "1rem",
       }}
@@ -65,9 +65,11 @@ const Dashboard = () => {
 
   return (
     <AdminLayout>
-      <Container component={"main"}>
+      <Container component={"main"} >
+        
         {AppBar}
         <Stack
+          padding={'2rem'}
           direction={{
             xs: "column",
             lg: "row",
