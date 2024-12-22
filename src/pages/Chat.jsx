@@ -1,22 +1,44 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {AppLayout} from '../components/layout/AppLayout';
-import { Box, IconButton, Stack } from '@mui/material';
+import { Box, IconButton, Skeleton, Stack } from '@mui/material';
 import { grayColor,orange } from '../constants/color';
 import { AttachFile as AttachFileIcon, Send as SendIcon} from '@mui/icons-material';
 import { InputBox } from '../components/styles/StyledComponents';
 import FileMenu from '../components/dialogs/FileMenu';
 import { sampleMessages } from '../constants/sampleData';
 import MessageComp from '../components/shared/MessageComponent';
+import { GetSocket } from '../socket';
+import { NEW_MESSAGE } from '../constants/events';
+import { useChatDetailsQuery } from '../store/api/api';
 
 const user = {
   _id:"sdfsdfsdf",
   name: 'User',
 }
-const Chat = () => {
+const Chat = ({chatId}) => {
   const containerRef = useRef();
+  const socket = GetSocket();
+  const chatDetails = useChatDetailsQuery({chatId,skip:!chatId})
+  const members = chatDetails?.data?.chat?.members
+  console.log(chatDetails?.data?.chat)
+
+  const [message,setMessage] = useState("")
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    
+    if(!message.trim()) return;
+
+    //Emmitting message to the server 
+    socket.emit(NEW_MESSAGE,{chatId,members,message})
+    setMessage("")
 
 
-  return (
+  }
+
+  return chatDetails.isLoading ? (
+    <Skeleton/>
+  ):(
     <>
       <Box 
         sx={{
@@ -52,6 +74,7 @@ const Chat = () => {
       <form style={{
         height:'10%'
         }}
+        onSubmit={submitHandler}
       >
         <Stack 
           direction={"row"} 
@@ -70,7 +93,7 @@ const Chat = () => {
             <AttachFileIcon/>
           </IconButton>
 
-          <InputBox  placeholder='Type Message here .... ' />
+          <InputBox  placeholder='Type Message here .... ' value={message} onChange={e => setMessage(e.target.value)}/>
 
           <IconButton sx={{
             bgcolor: orange,
@@ -82,7 +105,10 @@ const Chat = () => {
             "&:hover":{
               bgcolor:"error.dark"
             }
-          }}>
+            
+          }}
+            onClick={submitHandler}
+          >
             <SendIcon/>
           </IconButton>
         </Stack>

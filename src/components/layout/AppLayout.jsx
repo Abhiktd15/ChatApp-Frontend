@@ -19,7 +19,6 @@ const AppLayout =  (WrappedComponent) => {
         const chatId = params.chatId
         const dispatch = useDispatch()
         const socket = GetSocket()
-        console.log(socket.id)
 
         const {isMobile} = useSelector((state) => state.misc)
         const {user} = useSelector((state) => state.auth)
@@ -94,7 +93,7 @@ const AppLayout =  (WrappedComponent) => {
                         height={"100%"}
                         padding={"1rem 1rem"}
                     >
-                        <WrappedComponent {...props} />
+                        <WrappedComponent {...props} chatId={chatId}/>
                     </Grid>
                     <Grid 
                         item
