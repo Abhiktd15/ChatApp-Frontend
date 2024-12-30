@@ -93,7 +93,7 @@ const AppLayout =  (WrappedComponent) => {
                         height={"100%"}
                         padding={"1rem 1rem"}
                     >
-                        <WrappedComponent {...props} chatId={chatId}/>
+                        <WrappedComponent {...props} chatId={chatId} user={user}/>
                     </Grid>
                     <Grid 
                         item

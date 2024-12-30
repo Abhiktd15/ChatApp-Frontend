@@ -8,6 +8,7 @@ import RenderAttachment from './RenderAttachment';
 const MessageComponent = ({message,user}) => {
     const {sender,content,attachments=[],createdAt} = message;
     const sameSender = sender?._id === user?._id;
+
     const timeAgo = moment(createdAt).fromNow();
     return (
         <div style={{
@@ -55,7 +56,7 @@ const MessageComponent = ({message,user}) => {
                         )
                     })
                 }
-                <Typography variant='caption' position={'absolute'} right={'0.5rem'} bottom={"0.1rem"} color={"text.secondary"}>{timeAgo}</Typography>
+                <Typography sx={{fontSize:'0.5rem'}} position={'absolute'} right={'0.5rem'} bottom={"0.1rem"}  color={"text.secondary"}>{timeAgo}</Typography>
             </div>
         </div>
     )
